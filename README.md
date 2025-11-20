@@ -65,13 +65,10 @@ PROJECT SETUP GUIDE
 ------------------------------------------------------------
 
 1. CLONE THE REPOSITORY
---------------------------------
-git clone <your-repo-url>
+git clone <https://github.com/AkhilSareshwala/Role-Based-Access-Control-RBAC->
 cd <project-folder>
 
-
 2. CREATE VIRTUAL ENVIRONMENT
---------------------------------
 Windows:
 python -m venv venv
 venv\Scripts\activate
@@ -82,31 +79,23 @@ source venv/bin/activate
 
 
 3. INSTALL DEPENDENCIES
---------------------------------
 pip install -r requirements.txt
 
 
 4. CREATE .env FILE
---------------------------------
 Create a .env file in the root directory:
-
-SECRET_KEY=your-secret-key
-DEBUG=True
 
 
 5. RUN DATABASE MIGRATIONS
---------------------------------
 python manage.py makemigrations
 python manage.py migrate
 
 
 6. CREATE SUPERUSER
---------------------------------
 python manage.py createsuperuser
 
 
 7. RUN DEVELOPMENT SERVER
---------------------------------
 python manage.py runserver
 
 Open in browser:
