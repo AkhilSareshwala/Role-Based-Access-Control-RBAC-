@@ -66,9 +66,10 @@ PROJECT SETUP GUIDE
 
 1. CLONE THE REPOSITORY
 git clone <https://github.com/AkhilSareshwala/Role-Based-Access-Control-RBAC->
+
 cd <project-folder>
 
-2. CREATE VIRTUAL ENVIRONMENT
+3. CREATE VIRTUAL ENVIRONMENT
 Windows:
 python -m venv venv
 venv\Scripts\activate
