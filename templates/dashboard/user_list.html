@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}User List{% endblock %}
+{% block content %}
+<h2 class="text-2xl font-bold mb-4 text-blue-600">Users</h2>
+
+<form method="get" class="flex flex-wrap items-center gap-2 mb-4">
+  <input name="search" value="{{ search }}" placeholder="Search user..." class="border p-2 rounded flex-1">
+  <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Search</button>
+  <a href="{% url 'user_create' %}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Add User</a>
+  <a href="{% url 'export_users_csv' %}" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900 transition">Export CSV</a>
+</form>
+
+<div class="overflow-x-auto">
+  <table class="min-w-full bg-white rounded shadow overflow-hidden">
+    <thead class="bg-gray-100 text-left">
+      <tr>
+        <th class="p-2 border-b">ID</th>
+        <th class="p-2 border-b">Username</th>
+        <th class="p-2 border-b">Email</th>
+        <th class="p-2 border-b">Role</th>
+        <th class="p-2 border-b">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr class="hover:bg-gray-50">
+        <td class="p-2 border-b">{{ u.id }}</td>
+        <td class="p-2 border-b">{{ u.username }}</td>
+        <td class="p-2 border-b">{{ u.email }}</td>
+        <td class="p-2 border-b">{{ u.role }}</td>
+        <td class="p-2 border-b space-x-2">
+          <a href="{% url 'user_edit' u.id %}" class="text-blue-600 hover:underline">Edit</a>
+          <a href="{% url 'user_delete' u.id %}" class="text-red-600 hover:underline" onclick="return confirm('Delete this user?')">Delete</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5" class="text-center p-2">No users found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-4 flex justify-between">
+  {% if users.has_previous %}
+    <a href="?page={{ users.previous_page_number }}&search={{ search }}" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition">Previous</a>
+  {% endif %}
+  {% if users.has_next %}
+    <a href="?page={{ users.next_page_number }}&search={{ search }}" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition">Next</a>
+  {% endif %}
+</div>
+{% endblock %}

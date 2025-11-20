@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-xl font-bold mb-4">Projects</h2>
+
+<a href="{% url 'project_create' %}" class="px-3 py-1 bg-blue-500 text-white rounded">Add Project</a>
+
+<table class="mt-4 w-full border">
+    <tr class="bg-gray-100">
+        <th class="p-2">Name</th>
+        <th class="p-2">Actions</th>
+    </tr>
+
+    {% for p in projects %}
+    <tr>
+        <td class="p-2">{{ p.name }}</td>
+        <td class="p-2">
+            <a href="{% url 'project_edit' p.id %}" class="text-blue-600">Edit</a> |
+            <a href="{% url 'project_delete' p.id %}" class="text-red-600">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td class="p-2" colspan="2">No projects found.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

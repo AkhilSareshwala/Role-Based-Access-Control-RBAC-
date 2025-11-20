@@ -1,0 +1,7 @@
+# Ignore SQLite database
+db.sqlite3
+*.sqlite3
+
+# Ignore migrations (optional, but not recommended)
+*/migrations/*.py
+ */migrations/__pycache__/

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}My Tasks{% endblock %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-6 text-blue-600">My Tasks</h2>
+
+<div class="overflow-x-auto">
+  <table class="min-w-full bg-white rounded shadow overflow-hidden">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="p-3 border-b text-left">Title</th>
+        <th class="p-3 border-b text-left">Project</th>
+        <th class="p-3 border-b text-left">Current Status</th>
+        <th class="p-3 border-b text-left">Update Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in tasks %}
+      <tr class="hover:bg-gray-50">
+        <td class="p-2 border-b">{{ t.title }}</td>
+        <td class="p-2 border-b">{{ t.project.name }}</td>
+        <td class="p-2 border-b">
+          <span class="px-2 py-1 rounded 
+            {% if t.status == 'pending' %}
+            {% elif t.status == 'in_progress' %}
+            {% elif t.status == 'completed' %}
+            {% endif %}">
+            {{ t.status }}
+          </span>
+        </td>
+        <td class="p-2 border-b">
+          <form method="POST" class="flex items-center space-x-2">
+            {% csrf_token %}
+            <input type="hidden" name="task_id" value="{{ t.id }}">
+            <select name="status" class="border p-2 rounded">
+              <option value="pending" {% if t.status == "pending" %}selected{% endif %}>pending</option>
+              <option value="in_progress" {% if t.status == "in_progress" %}selected{% endif %}>in_progress</option>
+              <option value="completed" {% if t.status == "completed" %}selected{% endif %}>completed</option>
+            </select>
+            <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">
+              Save
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="text-center p-4 text-gray-500">No tasks assigned to you.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
