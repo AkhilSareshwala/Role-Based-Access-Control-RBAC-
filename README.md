@@ -6,7 +6,7 @@ A role-based access control (RBAC) system built with **Django**, featuring:
 - Project & Task Management
 - User Dashboard & Status Updates
 - Admin Panel for complete user management
-- Tailwind-based UI (via CDN)
+
 
 ---
 
@@ -51,5 +51,13 @@ A role-based access control (RBAC) system built with **Django**, featuring:
 
 ---
 
-## 📦 Project Structure (Important Files)
+## 🔑 Default Role Behavior
+
+| Role     | Access Dashboard | Manage Users | Manage Projects | Manage Tasks | Update Task Status |
+|----------|------------------|--------------|------------------|---------------|---------------------|
+| ADMIN    | ✅ Yes           | ✅ Yes        | ❌ No            | ❌ No         | ❌ No               |
+| MANAGER  | ❌ No            | ❌ No         | ✅ Yes           | ✅ Yes        | ✅ Yes              |
+| USER     | ❌ No            | ❌ No         | ❌ No            | ❌ No         | ✅ Yes (my tasks)  |
+
+---
 
